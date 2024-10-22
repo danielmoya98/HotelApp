@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Imagen de Bienvenida -->
+    <ImageView
+        android:id="@+id/welcomeImage"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/through_the_park_cuate"
+        android:contentDescription="Imagen de Bienvenida"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Título de Bienvenida -->
+    <TextView
+        android:id="@+id/tvWelcomeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Bienvenido a Hotel App!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp" />
+
+    <!-- Descripción -->
+    <TextView
+        android:id="@+id/tvWelcomeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estamos encantados de que estés aquí. Explora nuestros servicios y disfruta de tu estancia."
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp" />
+
+    <!-- Botón Iniciar Sesión -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar Sesión"
+        android:layout_marginBottom="10dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:backgroundTint="#FFC727"
+        app:cornerRadius="10dp" />
+
+    <!-- Botón Registrarse -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrarse"
+        android:textColor="@color/black"
+        style="@style/Widget.MaterialComponents.Button"
+        app:cornerRadius="10dp"
+        android:backgroundTint="#EDEFF2" />
+
+</LinearLayout>
