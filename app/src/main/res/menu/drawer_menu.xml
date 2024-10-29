@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- Opciones principales -->
+        <group android:checkableBehavior="single"
+            >
+
+
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/user"
+                android:title="Inicio" />
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/user"
+                android:title="Perfil" />
+            <item
+                android:id="@+id/nav_notifications"
+                android:icon="@drawable/user"
+                android:title="Notificaciones" />
+            <item
+                android:id="@+id/nav_orders"
+                android:icon="@drawable/user"
+                android:title="Mis Pedidos" />
+            <item
+                android:id="@+id/nav_search"
+                android:icon="@drawable/user"
+                android:title="Buscar servicios o productos" />
+        </group>
+
+
+        <item
+            android:title="Sobre Nosotros"
+            android:checkable="false"
+            android:checked="false"
+            android:enabled="false">
+        </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_location"
+            android:icon="@drawable/user"
+            android:title="Ubicación" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/user"
+            android:title="Ayuda y comentarios" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/user"
+            android:title="Acerca de" />
+    </group>
+
+        <!-- Botón de "Cerrar sesión" -->
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/user"
+            android:title="Cerrar sesión" />
+    </menu>
