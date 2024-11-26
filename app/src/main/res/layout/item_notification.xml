@@ -1,29 +1,36 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
-    android:backgroundTint="@color/white"
-    android:layout_margin="8dp">
+    android:layout_margin="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <!-- Icon -->
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/user"
-            android:layout_margin="8dp" />
+            android:layout_marginEnd="12dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="User Icon"
+            android:elevation="4dp"
+            android:clipToOutline="true" />
 
         <!-- Notification Details -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/notificationTitle"
@@ -32,15 +39,26 @@
                 android:text="Pedido #12345"
                 android:textColor="#193238"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:paddingBottom="4dp" />
 
             <TextView
                 android:id="@+id/notificationSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#193238"
+                android:textColor="#606060"
                 android:text="Fecha estimada de entrega: 10/10/2023"
                 android:textSize="14sp" />
         </LinearLayout>
+
+        <!-- Estado Icono -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/estado"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="Estado del Pedido"
+            android:layout_marginStart="12dp"
+            app:tint="#FF9800" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

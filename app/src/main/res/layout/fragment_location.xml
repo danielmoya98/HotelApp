@@ -1,15 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
+    android:background="#f6f8f9"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/mapImage"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Mapa del Negocio"
+        android:src="@drawable/ubicacion" />
+
+    <!-- CardView with Business Info -->
+    <LinearLayout
+        android:id="@+id/businessInfoContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ubicación"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:background="#f6f8f9"
+        android:layout_below="@id/mapImage"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Business Name Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:strokeColor="@color/white"
+            app:cardElevation="4dp"
+            android:backgroundTint="@color/white"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:contentDescription="Foto del Negocio"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/frame" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="Hotel"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="123 Calle Principal"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Address Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:layout_marginStart="8dp"
+            app:strokeColor="@color/white"
+            app:cardElevation="4dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:contentDescription="Foto de la Dirección"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/frame2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="Dirección"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lun-Vie: 9am - 6pm"
+                    android:textColor="@color/black"  />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <!-- Contact Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/contactButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/azul"
+        android:text="Contáctanos"
+        android:textAllCaps="false"
+        app:cornerRadius="10dp"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

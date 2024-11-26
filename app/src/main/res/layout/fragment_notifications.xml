@@ -15,8 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/search_background"
-        android:drawableStart="@drawable/user"
+        android:drawableStart="@drawable/search"
         android:hint="Buscar notificaciones..."
+        android:textColorHint="#7E8A8C"
         android:padding="8dp"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -34,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Todo"
-            android:backgroundTint="#ffc727"
+            android:backgroundTint="@color/azul"
             android:textColor="@color/white"
             android:layout_weight="1"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"

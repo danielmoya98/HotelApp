@@ -1,15 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:background="#f6f8f9"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ayuda y Comentarios"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Header and Search bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/user"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Ayuda y comentarios"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Buscador"
+            android:textColorHint="#7E8A8C"
+            app:boxBackgroundColor="#ebeded"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:startIconDrawable="@drawable/search">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:padding="8dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- FAQ Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:text="Preguntas Frecuentes"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="#193238"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Contact Support Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:text="Contactar Soporte"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="#193238"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:text="Si no encuentras lo que buscas, comunícate con nuestro equipo de soporte."
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="#193238" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/contactSupportButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/azul"
+            android:textColor="@color/white"
+            android:text="Contáctanos"
+            app:cornerRadius="10dp" />
+
+        <!-- User Feedback Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:text="Tu Opinión"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="#193238"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:text="Valoramos tus comentarios para mejorar nuestra aplicación."
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="#193238" />
+
+        <EditText
+            android:id="@+id/userComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:gravity="start"
+            android:hint="Describe tu problema o comparte tu opinión..."
+            android:minHeight="130dp"
+            android:textColor="#7E8A8C"
+            android:textColorHint="#7E8A8C"
+            android:textSize="13dp"
+            tools:ignore="TextSizeCheck" />
+
+        <!-- App Information -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:text="Información de la App"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="#193238"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Versión 1.0.0"
+            android:textColor="#193238" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:text="Última Actualización: 29/10/2024"
+            android:textColor="#193238" />
+    </LinearLayout>
+</ScrollView>

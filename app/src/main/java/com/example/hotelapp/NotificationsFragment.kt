@@ -32,9 +32,9 @@ class NotificationsFragment : Fragment() {
 
         // Inicializar la lista de notificaciones
         notifications = listOf(
-            Notification("Pedido #12345", "Enviado\nFecha estimada: 10/10/2023", "Pedido"),
+            Notification("Pedido #12345", "Enviado\nF. estimada: 10/10/2023", "Pedido"),
             Notification("Oferta Especial", "20% Descuento\nVálido hasta: 16/10/2023", "Oferta"),
-            Notification("Pedido #67890", "En camino\nFecha estimada: 12/10/2023", "Pedido"),
+            Notification("Pedido #67890", "En camino\nF. estimada: 12/10/2023", "Pedido"),
             Notification("Descuento en...", "Descuento\nVálido hasta: 20/10/2023", "Oferta")
         )
 

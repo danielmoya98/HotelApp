@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hotelapp.adapters.Categoria
 import com.example.hotelapp.adapters.CategoriaAdapter
 import com.example.hotelapp.adapters.Producto
 import com.example.hotelapp.adapters.ProductoAdapter
+import com.example.hotelapp.dataclass.Categoria
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -28,14 +28,6 @@ class HomeActivity : AppCompatActivity() {
         // Configuración del RecyclerView de productos en horizontal
         recyclerView2 = findViewById(R.id.recyclerProductos)
         recyclerView2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-        // Lista de categorías
-        categoriaList = listOf(
-            Categoria("Comida y Bebidas", R.drawable.user),
-            Categoria("Limpieza de Habitación", R.drawable.user),
-            Categoria("Mantenimiento", R.drawable.user),
-            Categoria("Servicios Especiales", R.drawable.user)
-        )
 
         // Lista de productos
         productoList = listOf(

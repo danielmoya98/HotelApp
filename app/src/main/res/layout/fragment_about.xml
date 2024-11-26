@@ -1,15 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:background="#f6f8f9"
+    android:scrollbars="none"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Acerca de"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Sección Sobre -->
+        <TextView
+            android:id="@+id/aboutTitle"
+            android:layout_width="wrap_content"
+            android:layout_gravity="start"
+            android:layout_height="wrap_content"
+            android:text="Sobre Nosotros"
+            android:textColor="#193238"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/aboutDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="[Nombre de la App] está dedicada a proporcionar la experiencia más completa para [propósito específico]. Nuestra misión esciles para todos."
+            android:textSize="14sp"
+
+            android:textColor="#193238"
+            android:paddingBottom="16dp" />
+
+        <Button
+            android:id="@+id/visitWebsiteButton"
+            android:layout_width="wrap_content"
+            android:background="@color/transparent"
+            android:layout_height="wrap_content"
+            android:text="Visita nuestro sitio web"
+            app:icon="@drawable/world"
+            app:iconTint="@color/black"
+            app:iconGravity="textStart"
+            android:textColor="@color/black" />
+
+        <!-- Nuestro Equipo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuestro Equipo"
+            android:layout_gravity="start"
+            android:textSize="20sp"
+
+            android:textColor="#193238"
+            android:textStyle="bold"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Miembro del Equipo -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/foto"
+                    android:contentDescription="Jane Doe" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jane Doe"
+
+                        android:textColor="#193238"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CEO Fundadora"
+
+                        android:textColor="#193238"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Otro Miembro del Equipo -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/foto2"
+                    android:contentDescription="John Smith" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="John Smith"
+
+                        android:textColor="#193238"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CTO"
+
+                        android:textColor="#193238"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Legal -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Legal"
+            android:layout_gravity="start"
+            android:textSize="20sp"
+
+            android:textColor="#193238"
+            android:textStyle="bold"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical">
+
+                    <!-- Primer Icono -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/file"
+                        android:contentDescription="Icono Izquierdo" />
+
+                    <!-- Texto en el centro -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Politica de privacidad"
+                        android:textStyle="bold"
+
+                        android:textColor="#193238"
+                        android:gravity="start"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
+
+                    <!-- Segundo Icono -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow"
+                        android:contentDescription="Icono Derecho" />
+                </LinearLayout>
+                <View
+                    android:layout_width="250dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/black">
+
+                </View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical">
+
+                    <!-- Primer Icono -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/file"
+                        android:contentDescription="Icono Izquierdo" />
+
+                    <!-- Texto en el centro -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Politica de privacidad"
+                        android:textStyle="bold"
+                        android:gravity="start"
+
+                        android:textColor="#193238"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
+
+                    <!-- Segundo Icono -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow"
+                        android:contentDescription="Icono Derecho" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- Agradecimientos -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agradecimientos"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+
+            android:textColor="#193238"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="#193238"
+            android:text="Agradecimientos especiales a todos los que contribuyeron al desarrollo y éxito de nuestra aplicación."
+            android:textSize="14sp" />
+
+        <!-- Sección de Síguenos -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Síguenos"
+            android:textSize="20sp"
+            android:layout_gravity="start"
+            android:textStyle="bold"
+
+            android:textColor="#193238"
+            android:paddingTop="24dp"
+            android:paddingBottom="8dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical">
+
+                    <!-- Primer Icono -->
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/user"
+                        android:contentDescription="Icono Izquierdo" />
+
+                    <!-- Texto en el centro -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Twitter"
+
+                        android:textColor="#193238"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck" />
+
+                    <!-- Segundo Icono -->
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@color/azul"
+                        android:textColor="@color/white"
+                        android:contentDescription="Icono Derecho"
+                        android:text="SEGUIR"
+                        app:cornerRadius="10dp"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+                <View
+                    android:layout_width="250dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/black">
+
+                </View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical">
+
+                    <!-- Primer Icono -->
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/user"
+                        android:contentDescription="Icono Izquierdo" />
+
+                    <!-- Texto en el centro -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Facebook"
+                        android:textSize="15dp"
+
+                        android:textColor="#193238"
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@color/azul"
+                        android:textColor="@color/white"
+                        android:contentDescription="Icono Derecho"
+                        android:text="SEGUIR"
+                        app:cornerRadius="10dp"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -17,16 +17,16 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/profileImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/ft"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:contentDescription="Profile Picture"
-        android:background="#edeff2"/>
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/azul"/>
 
-    <!-- Botón para Agregar Foto -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddPhoto"
         style="@style/Widget.MaterialComponents.Button"
@@ -35,7 +35,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Subir Foto"
-        android:backgroundTint="#ffc727"
+      android:backgroundTint="@color/azul"
+        android:textColor="@color/white"
         app:cornerRadius="10dp" />
 
     <!-- TextView para Nombre Completo -->
@@ -150,5 +151,6 @@
         android:layout_marginTop="20dp"
         android:text="Crear Cuenta"
         app:cornerRadius="10dp"
-        android:backgroundTint="#ffc727"/>
+      android:backgroundTint="@color/azul"
+        android:textColor="@color/white"/>
 </LinearLayout>
