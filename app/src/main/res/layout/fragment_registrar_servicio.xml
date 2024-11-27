@@ -1,0 +1,66 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del Servicio">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombreServicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescripcionServicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Precio">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPrecioServicio"
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btnAddPhotoServicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subir Imagen"
+            android:layout_marginTop="16dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagePreviewServicio"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+             />
+
+        <Button
+            android:id="@+id/btnCreateService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar Servicio"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>

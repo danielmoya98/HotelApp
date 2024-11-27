@@ -92,7 +92,7 @@ class RegistrarActivity : AppCompatActivity() {
                         "correo" to email,
                         "telefono" to telefono,
                         "contrasena" to password,
-                        "rol" to "cliente",
+                        "rol" to "empleado",
                         "foto_url" to photoUrl
                     )
                 )

@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class NavegacionActivity : AppCompatActivity() {
+
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
 
@@ -38,6 +39,11 @@ class NavegacionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navegacion)
 
+        // Inicializar vistas
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+
+        // Verificar sesión del usuario
         if (UserSession.userId == null) {
             Toast.makeText(this, "Sesión expirada. Por favor, inicia sesión.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
@@ -46,9 +52,23 @@ class NavegacionActivity : AppCompatActivity() {
             return
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.navigation_view)
+        val userRole = UserSession.userRole
+        when (userRole) {
+            "empleado" -> {
+                navigationView.inflateMenu(R.menu.menu_empleado)
+                configurarNavegacionParaEmpleado()
+            }
+            "cliente" -> {
+                navigationView.inflateMenu(R.menu.drawer_menu)
+                configurarNavegacion() // Método existente para cliente
+            }
+            else -> {
+                navigationView.inflateMenu(R.menu.drawer_menu) // Menú por defecto
+                configurarNavegacion()
+            }
+        }
 
+        // Configurar toolbar y toggle del drawer
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.setNavigationIcon(R.drawable.arrow)
@@ -60,13 +80,23 @@ class NavegacionActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        // Cargar el fragmento inicial si es la primera vez
+        if (savedInstanceState == null) {
+            val defaultFragment = if (userRole == "empleado") RegistrarProductoFragment() else HomeFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.content_frame, defaultFragment)
+                .commit()
+
+            // Marcar el elemento inicial en el menú
+            navigationView.setCheckedItem(if (userRole == "empleado") R.id.nav_productos else R.id.nav_home)
+        }
+
+        // Cargar datos del usuario
         cargarDatosUsuario()
-        configurarNavegacion()
     }
 
     override fun onResume() {
         super.onResume()
-
         // Refrescar datos del usuario
         actualizarDrawerHeader()
     }
@@ -76,11 +106,12 @@ class NavegacionActivity : AppCompatActivity() {
             try {
                 val userId = UserSession.userId ?: throw Exception("Usuario no autenticado.")
                 val userDetails = withContext(Dispatchers.IO) {
-                    supabase.from("usuarios").select(columns = Columns.list("id", "nombre","contrasena", "correo", "telefono", "rol", "foto_url")) {
+                    supabase.from("usuarios").select(columns = Columns.list("id", "nombre", "contrasena", "correo", "telefono", "rol", "foto_url")) {
                         filter { eq("id", userId) }
                     }.decodeSingle<Usuario>()
                 }
 
+                // Guardar datos del usuario en la sesión
                 UserSession.userName = userDetails.nombre
                 UserSession.userEmail = userDetails.correo
                 UserSession.userTel = userDetails.telefono
@@ -88,6 +119,7 @@ class NavegacionActivity : AppCompatActivity() {
                 UserSession.userRole = userDetails.rol
                 UserSession.userPhotoUrl = userDetails.fotoUrl
 
+                // Actualizar el encabezado del drawer
                 actualizarDrawerHeader()
             } catch (e: Exception) {
                 Toast.makeText(this@NavegacionActivity, "Error al cargar datos: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -115,6 +147,31 @@ class NavegacionActivity : AppCompatActivity() {
         }
     }
 
+    private fun configurarNavegacionParaEmpleado() {
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            navigationView.menu.forEach { it.isChecked = false }
+            menuItem.isChecked = true
+            val fragment = when (menuItem.itemId) {
+                R.id.nav_productos -> RegistrarProductoFragment()
+                R.id.nav_servicios -> RegistrarServicioFragment()
+                R.id.nav_help -> HelpFragment()
+
+                R.id.nav_logout -> {
+                    cerrarSesion()
+                    null
+                }
+                else -> null
+            }
+            fragment?.let {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, it)
+                    .commit()
+            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+    }
+
     private fun configurarNavegacion() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             navigationView.menu.forEach { it.isChecked = false }
@@ -123,6 +180,12 @@ class NavegacionActivity : AppCompatActivity() {
                 R.id.nav_home -> HomeFragment()
                 R.id.nav_profile -> ProfileFragment()
                 R.id.nav_notifications -> NotificationsFragment()
+                R.id.nav_orders -> OrdersFragment()
+                R.id.nav_search -> SearchFragment()
+                R.id.nav_location -> LocationFragment()
+                R.id.nav_help -> HelpFragment()
+                R.id.nav_about -> AboutFragment()
+
                 R.id.nav_logout -> {
                     cerrarSesion()
                     null

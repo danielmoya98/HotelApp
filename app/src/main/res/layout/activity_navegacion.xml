@@ -42,7 +42,7 @@
         app:itemBackground="@color/switch_track_color"
         app:itemIconTint="@color/switch_thumb_color"
         app:itemTextColor="@color/switch_thumb_color"
-        app:menu="@menu/drawer_menu">
+        >
 
     </com.google.android.material.navigation.NavigationView>
 
