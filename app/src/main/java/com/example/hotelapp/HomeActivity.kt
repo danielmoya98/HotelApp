@@ -4,15 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hotelapp.adapters.CategoriaAdapter
 import com.example.hotelapp.adapters.Producto
 import com.example.hotelapp.adapters.ProductoAdapter
-import com.example.hotelapp.dataclass.Categoria
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var categoriaAdapter: CategoriaAdapter
-    private lateinit var categoriaList: List<Categoria>
     private lateinit var recyclerView2: RecyclerView
     private lateinit var productoAdapter: ProductoAdapter
     private lateinit var productoList: List<Producto>
@@ -36,10 +32,6 @@ class HomeActivity : AppCompatActivity() {
             Producto("Ensalada César", "Ensalada con lechuga, crutones y aderezo César.", R.drawable.sauna),
             Producto("Tacos", "Tacos con carne, guacamole y salsa picante.", R.drawable.sauna)
         )
-
-        // Adaptadores
-        categoriaAdapter = CategoriaAdapter(categoriaList)
-        recyclerView.adapter = categoriaAdapter
 
         productoAdapter = ProductoAdapter(productoList)
         recyclerView2.adapter = productoAdapter

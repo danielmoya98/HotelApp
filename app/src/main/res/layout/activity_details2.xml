@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Servicio Seleccionado -->
+        <!-- com.example.hotelapp.dataclass.Servicio Seleccionado -->
         <TextView
             android:id="@+id/tvServicioSeleccionado"
             android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
 
-        <!-- CardView para Detalles del Servicio -->
+        <!-- CardView para Detalles del com.example.hotelapp.dataclass.Servicio -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- CardView para Detalles del Servicio Completo -->
+        <!-- CardView para Detalles del com.example.hotelapp.dataclass.Servicio Completo -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

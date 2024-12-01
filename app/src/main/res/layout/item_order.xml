@@ -17,7 +17,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Imagen del Producto con estilo redondeado -->
+        <!-- Imagen del com.example.hotelapp.dataclass.Producto con estilo redondeado -->
         <ImageView
             android:id="@+id/productImage"
             android:layout_width="100dp"
@@ -29,7 +29,7 @@
             android:background="@drawable/sauna"
             android:elevation="4dp" />
 
-        <!-- Detalles del Producto -->
+        <!-- Detalles del com.example.hotelapp.dataclass.Producto -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -8,14 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hotelapp.adapters.CategoriaAdapter
 import com.example.hotelapp.adapters.Destination
 import com.example.hotelapp.adapters.DestinationAdapter
 import com.example.hotelapp.adapters.Destinations
 import com.example.hotelapp.adapters.DestinationsAdapter
 import com.example.hotelapp.adapters.Producto
 import com.example.hotelapp.adapters.ProductoAdapter
-import com.example.hotelapp.dataclass.Categoria
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.from
@@ -38,7 +36,7 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerViewProductos: RecyclerView
     private lateinit var recyclerViewDestinations: RecyclerView
     private lateinit var recyclerViewDestinations2: RecyclerView
-    private lateinit var categoriaAdapter: CategoriaAdapter
+
     private lateinit var productoAdapter: ProductoAdapter
 
 //    // Estado Mutable para las categorías, inicializado vacío
@@ -60,15 +58,7 @@ class HomeFragment : Fragment() {
         recyclerViewDestinations = setupRecyclerView(view, R.id.recyclerDestinations)
         recyclerViewDestinations2 = setupRecyclerView(view, R.id.recyclerViewDestinationss)
 
-        // Configurar adaptador inicial
-        categoriaAdapter = CategoriaAdapter(emptyList())
-        recyclerViewCategorias.adapter = categoriaAdapter
 
-//        // Observar cambios en la lista de categorías
-//        observeCategorias()
-//
-//        // Cargar datos de categorías desde Supabase
-//        loadCategorias()
 
         setupStaticDestinations()
         setupStaticProducts()

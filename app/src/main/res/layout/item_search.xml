@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Imagen del Producto -->
+        <!-- Imagen del com.example.hotelapp.dataclass.Producto -->
         <ImageView
             android:id="@+id/imgProducto"
             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <!-- Descripción del Producto con Icono -->
+        <!-- Descripción del com.example.hotelapp.dataclass.Producto con Icono -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

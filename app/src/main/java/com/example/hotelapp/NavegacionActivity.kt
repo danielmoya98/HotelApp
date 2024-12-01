@@ -152,6 +152,8 @@ class NavegacionActivity : AppCompatActivity() {
             navigationView.menu.forEach { it.isChecked = false }
             menuItem.isChecked = true
             val fragment = when (menuItem.itemId) {
+                R.id.nav_profile ->  ProfileFragment()
+                R.id.nav_dashboard -> HomeEmpleadoFragment()
                 R.id.nav_productos -> RegistrarProductoFragment()
                 R.id.nav_servicios -> RegistrarServicioFragment()
                 R.id.nav_help -> HelpFragment()

@@ -1,6 +1,6 @@
 package com.example.hotelapp
 
-import Producto
+import com.example.hotelapp.dataclass.Producto
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -102,7 +102,7 @@ class RegistrarProductoFragment : Fragment() {
 
                 val imageUrl = "https://xjxpeyqzvalgoursiqxb.supabase.co/storage/v1/object/public/productos/$fileName"
 
-                // Crear un objeto Producto
+                // Crear un objeto com.example.hotelapp.dataclass.Producto
                 val producto = Producto(
                     nombre = nombre,
                     descripcion = descripcion,
@@ -110,15 +110,15 @@ class RegistrarProductoFragment : Fragment() {
                     stock = stock,
                     imagen_url = imageUrl,
                     activo = true,
-                 
+                    categoria = "producto"
                 )
 
                 // Insertar producto en la base de datos
                 supabase.postgrest["productos"].insert(producto)
 
                 requireActivity().runOnUiThread {
-                    Toast.makeText(requireContext(), "Producto registrado exitosamente", Toast.LENGTH_SHORT).show()
-                    requireActivity().onBackPressed() // Navegar hacia atrás después del registro
+                    Toast.makeText(requireContext(), "com.example.hotelapp.dataclass.Producto registrado exitosamente", Toast.LENGTH_SHORT).show()
+
                 }
             } catch (e: Exception) {
                 requireActivity().runOnUiThread {

@@ -1,74 +1,59 @@
 package com.example.hotelapp.adapters
 
-import android.os.Parcel
-import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.hotelapp.R
-
-data class Item(
-    val name: String,
-    val category: String,
-    val description: String,
-    val price: Double
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readDouble()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(category)
-        parcel.writeString(description)
-        parcel.writeDouble(price)
-    }
-
-    override fun describeContents(): Int = 0
-
-    companion object CREATOR : Parcelable.Creator<Item> {
-        override fun createFromParcel(parcel: Parcel): Item = Item(parcel)
-        override fun newArray(size: Int): Array<Item?> = arrayOfNulls(size)
-    }
-}
+import com.example.hotelapp.dataclass.Producto
+import io.github.jan.supabase.storage.Storage
 
 class ProductAdapter(
-    private val items: List<Item>,
-    private val onItemClick: (Item) -> Unit // Agregamos el click listener como parámetro
+    private val productList: List<Producto>,
+    private val storage: Storage // Instancia de Supabase Storage
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
+    class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imgProducto: ImageView = view.findViewById(R.id.imgProducto)
+        val tvNombreProducto: TextView = view.findViewById(R.id.tvNombreProducto)
+        val tvPrecioProducto: TextView = view.findViewById(R.id.tvPrecioProducto)
+        val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
+        val tvRatingValue: TextView = view.findViewById(R.id.tvRatingValue)
+        val tvDescripcionProducto: TextView = view.findViewById(R.id.tvDescripcionProducto)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_search, parent, false)
         return ProductViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val item = items[position]
-        holder.bind(item)
-        holder.itemView.setOnClickListener { onItemClick(item) } // Configura el clic para cada elemento
+        val product = productList[position]
+
+        holder.tvNombreProducto.text = product.nombre
+        holder.tvPrecioProducto.text = "${product.precio} Bs"
+        holder.ratingBar.rating = 4.0f // Ajusta según tu lógica
+        holder.tvRatingValue.text = "4.0" // Ajusta según tu lógica
+        holder.tvDescripcionProducto.text = product.descripcion
+
+
+        val publicUrl = storage.from("productos").publicUrl(product.imagen_url)
+
+        Log.d("ProductAdapter", "Generated public URL: $publicUrl")
+
+        // Cargar imagen con Glide
+        Glide.with(holder.imgProducto.context)
+            .load(product.imagen_url)
+            .placeholder(R.drawable.sauna) // Imagen de placeholder
+            .error(R.drawable.sauna) // Imagen en caso de error
+            .into(holder.imgProducto)
     }
 
-    override fun getItemCount(): Int = items.size
-
-    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.tvNombreProducto)
-        private val priceTextView: TextView = itemView.findViewById(R.id.tvPrecioProducto)
-        private val descriptionTextView: TextView = itemView.findViewById(R.id.tvDescripcionProducto)
-        private val imageView: ImageView = itemView.findViewById(R.id.imgProducto)
-
-        fun bind(item: Item) {
-            nameTextView.text = item.name
-            priceTextView.text = "${item.price}bs"
-            descriptionTextView.text = item.description
-
-            // Asigna una imagen según el nombre o categoría del producto
-            imageView.setImageResource(R.drawable.sauna) // Puedes cambiar esto para asignar imágenes dinámicamente
-        }
-    }
+    override fun getItemCount(): Int = productList.size
 }

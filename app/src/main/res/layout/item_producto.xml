@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         >
 
-        <!-- Imagen del Producto -->
+        <!-- Imagen del com.example.hotelapp.dataclass.Producto -->
         <ImageView
             android:id="@+id/imgProducto"
             android:layout_width="115dp"
@@ -40,7 +40,7 @@
                 android:paddingBottom="8dp">
 
 
-                <!-- Nombre del Producto -->
+                <!-- Nombre del com.example.hotelapp.dataclass.Producto -->
                 <TextView
                     android:id="@+id/tvNombreProducto"
                     android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                     android:textSize="18sp"
                     android:textColor="@android:color/black" />
 
-                <!-- Descripción del Producto -->
+                <!-- Descripción del com.example.hotelapp.dataclass.Producto -->
                 <TextView
                     android:id="@+id/tvDescripcionProducto"
                     android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
                     android:stepSize="0.5"
                     style="?android:attr/ratingBarStyleSmall" />
 
-                <!-- Precio del Producto -->
+                <!-- Precio del com.example.hotelapp.dataclass.Producto -->
                 <TextView
                     android:id="@+id/tvPrecioProducto"
                     android:layout_width="wrap_content"

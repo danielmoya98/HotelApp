@@ -1,6 +1,6 @@
 package com.example.hotelapp
 
-import Servicio
+import com.example.hotelapp.dataclass.Servicio
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.jan.supabase.createSupabaseClient
@@ -94,20 +93,21 @@ class RegistrarServicioFragment : Fragment() {
 
                 val imageUrl = "https://xjxpeyqzvalgoursiqxb.supabase.co/storage/v1/object/public/servicios/$fileName"
 
-                // Crear un objeto Servicio
+                // Crear un objeto com.example.hotelapp.dataclass.Servicio
                 val servicio = Servicio(
                     nombre = nombre,
                     descripcion = descripcion,
                     precio = precio,
                     disponibilidad = true,
-                    imagen_url = imageUrl
+                    imagen_url = imageUrl,
+                    categoria = "servicio"
                 )
 
                 // Insertar servicio en la base de datos
                 supabase.postgrest["servicios"].insert(servicio)
 
                 requireActivity().runOnUiThread {
-                    Toast.makeText(requireContext(), "Servicio registrado exitosamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "com.example.hotelapp.dataclass.Servicio registrado exitosamente", Toast.LENGTH_SHORT).show()
                     requireActivity().onBackPressed() // Navegar hacia atrás después del registro
                 }
             } catch (e: Exception) {

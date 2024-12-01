@@ -1,3 +1,5 @@
+package com.example.hotelapp.dataclass
+
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -7,7 +9,9 @@ data class Producto(
     val descripcion: String,
     val precio: Double,
     val stock: Int,
+    val categoria : String,
     val imagen_url: String,
     val activo: Boolean = true,
 
 )
+
