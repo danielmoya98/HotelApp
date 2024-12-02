@@ -1,15 +1,18 @@
 package com.example.hotelapp
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hotelapp.adapters.ProductAdapter
+import com.example.hotelapp.adapters.MultiTypeAdapter
 import com.example.hotelapp.dataclass.Producto
 import com.example.hotelapp.dataclass.Servicio
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.from
@@ -22,11 +25,14 @@ import kotlinx.coroutines.withContext
 
 class SearchFragment : Fragment() {
 
-    private lateinit var searchEditText: TextInputEditText
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: ProductAdapter
-    private val productos = mutableListOf<Producto>()
-    private val servicios = mutableListOf<Producto>()
+    private lateinit var adapter: MultiTypeAdapter
+    private lateinit var searchEditText: TextInputEditText
+    private lateinit var tabLayout: TabLayout
+
+    private val items = mutableListOf<Any>() // Lista original
+    private val filteredItems = mutableListOf<Any>() // Lista filtrada
+    private var activeTab = "Todos" // Tab activa: "Todos", "Servicios", "Productos"
 
     // Crear cliente Supabase
     private val supabaseClient = createSupabaseClient(
@@ -48,28 +54,66 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Configurar RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerView) // Asegúrate de usar el ID correcto
+        recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = ProductAdapter(productos, supabaseClient.storage)
+
+        // Configurar campo de búsqueda
+        searchEditText = view.findViewById(R.id.searchEditText)
+
+        // Configurar TabLayout
+        tabLayout = view.findViewById(R.id.tabLayout)
+
+        // Inicializar el adaptador con la lista filtrada
+        adapter = MultiTypeAdapter(filteredItems, supabaseClient.storage)
         recyclerView.adapter = adapter
 
-        // Llamar a cargarProductos para llenar la lista
+        // Llenar la lista de productos y servicios
         cargarProductos()
 
+        // Escuchar cambios en el texto del campo de búsqueda
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filtrarLista(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Configurar listener para el TabLayout
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                activeTab = tab?.text.toString()
+                filtrarLista(searchEditText.text.toString())
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 
     private fun cargarProductos() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Consultar productos desde Supabase
-                val response = supabaseClient.from("productos")
+                val responseProductos = supabaseClient.from("productos")
                     .select()
                     .decodeList<Producto>()
 
+                // Consultar servicios desde Supabase
+                val responseServicios = supabaseClient.from("servicios")
+                    .select()
+                    .decodeList<Servicio>()
+
                 // Actualizar la lista en el hilo principal
                 withContext(Dispatchers.Main) {
-                    productos.clear()
-                    productos.addAll(response)
+                    items.clear()
+                    items.addAll(responseProductos)
+                    items.addAll(responseServicios)
+
+                    // Mostrar todos los elementos inicialmente
+                    filteredItems.clear()
+                    filteredItems.addAll(items)
                     adapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
@@ -78,4 +122,29 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun filtrarLista(query: String) {
+        val lowerCaseQuery = query.lowercase()
+
+        // Filtrar los elementos por texto y pestaña activa
+        filteredItems.clear()
+        filteredItems.addAll(items.filter {
+            val matchesText = when (it) {
+                is Producto -> it.nombre.lowercase().contains(lowerCaseQuery) || it.descripcion.lowercase().contains(lowerCaseQuery)
+                is Servicio -> it.nombre.lowercase().contains(lowerCaseQuery) || it.descripcion.lowercase().contains(lowerCaseQuery)
+                else -> false
+            }
+
+            val matchesTab = when (activeTab) {
+                "Todos" -> true
+                "Servicios" -> it is Servicio
+                "Productos" -> it is Producto
+                else -> false
+            }
+
+            matchesText && matchesTab
+        })
+
+        // Actualizar el adaptador
+        adapter.notifyDataSetChanged()
+    }
 }

@@ -33,7 +33,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/notificationTitle"
+                android:id="@+id/fechaEnvioTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pedido #12345"
@@ -43,7 +43,7 @@
                 android:paddingBottom="4dp" />
 
             <TextView
-                android:id="@+id/notificationSubtitle"
+                android:id="@+id/mensajeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#606060"

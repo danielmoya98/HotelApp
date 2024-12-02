@@ -9,15 +9,31 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hotelapp.adapters.Notification
-import com.example.hotelapp.adapters.NotificationAdapter
+import com.example.hotelapp.adapters.NotificacionesAdapter
+import com.example.hotelapp.dataclass.Notificacion
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.storage.Storage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NotificationsFragment : Fragment() {
 
-    private lateinit var adapter: NotificationAdapter
-    private lateinit var notifications: List<Notification>
+
+    private lateinit var notificacionesAdapter: NotificacionesAdapter
+    private val notificaciones = mutableListOf<Notificacion>()
+
+    private val supabaseClient = createSupabaseClient(
+        supabaseUrl = "https://xjxpeyqzvalgoursiqxb.supabase.co",
+        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqeHBleXF6dmFsZ291cnNpcXhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE0MzY0MTIsImV4cCI6MjA0NzAxMjQxMn0.xL5oNgjXi4LWBkmWezvtUYs6PMsPTe4lCviQkYUYPek"
+    ) {
+        install(io.github.jan.supabase.postgrest.Postgrest)
+        install(Storage)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,57 +46,39 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inicializar la lista de notificaciones
-        notifications = listOf(
-            Notification("Pedido #12345", "Enviado\nF. estimada: 10/10/2023", "Pedido"),
-            Notification("Oferta Especial", "20% Descuento\nVálido hasta: 16/10/2023", "Oferta"),
-            Notification("Pedido #67890", "En camino\nF. estimada: 12/10/2023", "Pedido"),
-            Notification("Descuento en...", "Descuento\nVálido hasta: 20/10/2023", "Oferta")
-        )
-
-        // Configurar RecyclerView
+        // Configuración del RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewNotifications)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = NotificationAdapter(notifications)
-        recyclerView.adapter = adapter
+        notificacionesAdapter = NotificacionesAdapter(notificaciones)
+        recyclerView.adapter = notificacionesAdapter
 
-        // Configurar el campo de búsqueda
-        val searchEditText = view.findViewById<EditText>(R.id.searchEditText)
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filter(s.toString())
+        // Cargar las notificaciones
+        cargarNotificaciones()
+
+
+    }
+
+    private fun cargarNotificaciones() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // Consultamos las notificaciones desde Supabase
+                val response = supabaseClient.from("notificaciones")
+                    .select()
+                    .decodeList<Notificacion>() // Decodificamos las notificaciones
+
+                // Actualizamos la lista en el hilo principal
+                withContext(Dispatchers.Main) {
+                    notificaciones.clear()  // Limpiamos la lista de notificaciones
+                    notificaciones.addAll(response)  // Agregamos las nuevas notificaciones
+                    notificacionesAdapter.notifyDataSetChanged() // Notificamos al adaptador que los datos han cambiado
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()  // Manejo de errores
             }
-        })
-
-        // Configurar botones de filtro
-        view.findViewById<Button>(R.id.filterAllButton).setOnClickListener {
-            filterByType(null)
-        }
-        view.findViewById<Button>(R.id.filterOrdersButton).setOnClickListener {
-            filterByType("Pedido")
-        }
-        view.findViewById<Button>(R.id.filterOffersButton).setOnClickListener {
-            filterByType("Oferta")
         }
     }
 
-    // Filtrar por texto de búsqueda
-    private fun filter(text: String) {
-        val filteredNotifications = notifications.filter {
-            it.title.contains(text, ignoreCase = true) || it.subtitle.contains(text, ignoreCase = true)
-        }
-        adapter.filterList(filteredNotifications)
-    }
 
-    // Filtrar por tipo (e.g., "Pedido", "Oferta")
-    private fun filterByType(type: String?) {
-        val filteredNotifications = if (type == null) {
-            notifications
-        } else {
-            notifications.filter { it.type == type }
-        }
-        adapter.filterList(filteredNotifications)
-    }
+
+
 }

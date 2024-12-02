@@ -9,60 +9,60 @@
     android:background="#f6f8f9"
     tools:context=".MainActivity">
 
-    <!-- Search Bar -->
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/search_background"
-        android:drawableStart="@drawable/search"
-        android:hint="Buscar notificaciones..."
-        android:textColorHint="#7E8A8C"
-        android:padding="8dp"
-        tools:ignore="TouchTargetSizeCheck" />
+<!--    &lt;!&ndash; Search Bar &ndash;&gt;-->
+<!--    <com.google.android.material.textfield.TextInputEditText-->
+<!--        android:id="@+id/searchEditText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/search_background"-->
+<!--        android:drawableStart="@drawable/search"-->
+<!--        android:hint="Buscar notificaciones..."-->
+<!--        android:textColorHint="#7E8A8C"-->
+<!--        android:padding="8dp"-->
+<!--        tools:ignore="TouchTargetSizeCheck" />-->
 
-    <!-- Filters -->
-    <LinearLayout
-        android:id="@+id/filtersLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+<!--    &lt;!&ndash; Filters &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/filtersLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        >-->
 
-        <!-- Filter Buttons -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/filterAllButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Todo"
-            android:backgroundTint="@color/azul"
-            android:textColor="@color/white"
-            android:layout_weight="1"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginEnd="8dp" />
+<!--        &lt;!&ndash; Filter Buttons &ndash;&gt;-->
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/filterAllButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Todo"-->
+<!--            android:backgroundTint="@color/azul"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:layout_weight="1"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_marginEnd="8dp" />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/filterOrdersButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#193238"
-            android:text="Pedidos"
-            android:layout_weight="1"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/filterOrdersButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="#193238"-->
+<!--            android:text="Pedidos"-->
+<!--            android:layout_weight="1"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginEnd="8dp" />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/filterOffersButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ofertas"
-            android:textColor="#193238"
-            android:layout_weight="1"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginStart="8dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/filterOffersButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Ofertas"-->
+<!--            android:textColor="#193238"-->
+<!--            android:layout_weight="1"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_marginStart="8dp" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <!-- RecyclerView for Notifications -->
     <androidx.recyclerview.widget.RecyclerView

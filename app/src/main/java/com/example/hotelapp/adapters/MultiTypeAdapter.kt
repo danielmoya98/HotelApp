@@ -1,5 +1,6 @@
 package com.example.hotelapp.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ class MultiTypeAdapter(
     companion object {
         const val TYPE_PRODUCT = 0
         const val TYPE_SERVICE = 1
+        const val TAG = "MultiTypeAdapter" // Etiqueta para los logs
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -55,6 +57,9 @@ class MultiTypeAdapter(
                 productHolder.tvRatingValue.text = "4.0"
                 productHolder.tvDescripcionProducto.text = item.descripcion
 
+                // Log para depurar la URL del producto
+                Log.d(TAG, "Producto imagen_url: ${item.imagen_url}")
+
                 Glide.with(productHolder.imgProducto.context)
                     .load(item.imagen_url)
                     .placeholder(R.drawable.sauna)
@@ -69,6 +74,9 @@ class MultiTypeAdapter(
                 serviceHolder.ratingBar.rating = 4.0f
                 serviceHolder.tvRatingValue.text = "4.0"
                 serviceHolder.tvDescripcionServicio.text = item.descripcion
+
+                // Log para depurar la URL del servicio
+                Log.d(TAG, "Servicio imagen_url: ${item.imagen_url}")
 
                 Glide.with(serviceHolder.imgServicio.context)
                     .load(item.imagen_url)

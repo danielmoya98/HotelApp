@@ -40,27 +40,9 @@ class OrdersFragment : Fragment() {
         ordersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         ordersRecyclerView.adapter = orderAdapter
 
-        // Inicializamos el campo de búsqueda
-        val searchEditText = view.findViewById<TextInputEditText>(R.id.searchEditText)
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                filterOrders(searchEditText.text.toString())
-            }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
 
-        // Configuramos TabLayout para el filtrado por estado
-        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                filterOrders(searchEditText.text.toString())
-            }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
     }
 
     private fun filterOrders(query: String) {

@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.espresso.core)
+    implementation(libs.filament.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

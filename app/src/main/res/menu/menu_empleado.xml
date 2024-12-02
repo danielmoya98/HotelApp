@@ -8,6 +8,10 @@
         android:title="Dashboard" />
 
     <item
+        android:id="@+id/nav_notis"
+        android:title="Notificaiones" />
+
+    <item
         android:id="@+id/nav_productos"
         android:title="Crear Productos" />
 
