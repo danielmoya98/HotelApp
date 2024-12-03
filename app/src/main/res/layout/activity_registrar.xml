@@ -60,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#edeff2"
-            android:drawableEnd="@drawable/user"
+
+            android:textColor="@android:color/black"
             android:hint="Nombre Completo"
             android:inputType="textPersonName"
             android:paddingEnd="12dp" />
@@ -86,6 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#edeff2"
+
+            android:textColor="@android:color/black"
             android:hint="Correo Electrónico"
             android:inputType="textEmailAddress"
 
@@ -112,6 +115,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#edeff2"
+
+            android:textColor="@android:color/black"
             android:hint="Ingrese su numero de telefono"
             android:inputType="textPassword"
             android:paddingEnd="12dp" />
@@ -138,9 +143,12 @@
             android:layout_height="wrap_content"
             android:background="#edeff2"
             android:hint="Contraseña"
+
+            android:textColor="@android:color/black"
             android:inputType="textPassword"
             android:paddingEnd="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <!-- Botón de Crear Cuenta -->
     <com.google.android.material.button.MaterialButton

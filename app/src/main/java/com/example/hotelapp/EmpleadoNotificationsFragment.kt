@@ -83,38 +83,52 @@ class EmpleadoNotificationsFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Primero, marcamos la notificación como leída en la base de datos
-                val updatedNotification = notificacion.copy(leido = true)
-
-                // Actualizamos la notificación
                 val updateNotificationResponse = supabaseClient.from("notificaciones")
-                    .update(updatedNotification)
-                    {
+                    .update(mapOf("leido" to true)) { // Actualiza solo el campo 'leido'
                         filter {
-                            eq("reserva_id", notificacion.reserva_id) // Filtra por el ID del usuario
-                        }
-                    }// Usamos eq para filtrar por reserva_id
-
-                // Luego, actualizamos el estado de la reserva a "confirmado"
-                val updateReservationResponse = supabaseClient.from("reservas")
-                    .update(mapOf("estado" to "confirmado"))
-                    {
-                        filter {
-                            eq("id", notificacion.reserva_id) // Filtra por el ID del usuario
+                            // Filtra por reserva_id o pedido_id, dependiendo de cuál esté presente
+                            when {
+                                notificacion.reserva_id != null -> eq("reserva_id", notificacion.reserva_id)
+                                notificacion.pedido_id != null -> eq("pedido_id", notificacion.pedido_id)
+                                else -> throw IllegalArgumentException("La notificación no contiene ni reserva_id ni pedido_id.")
+                            }
                         }
                     }
 
-                // Si ambos updates son exitosos, actualizamos la lista de notificaciones en el hilo principal
+                // Verificar si la notificación es sobre una reserva
+                if (notificacion.reserva_id != null) {
+                    // Actualizar el estado de la reserva
+                    val updateReservationResponse = supabaseClient.from("reservas")
+                        .update(mapOf("estado" to "confirmado")) {
+                            filter {
+                                eq("id", notificacion.reserva_id)
+                            }
+                        }
+                }
+                // Verificar si la notificación es sobre un pedido
+                else if (notificacion.pedido_id != null) {
+                    // Actualizar el estado del pedido
+                    val updateOrderResponse = supabaseClient.from("pedidos")
+                        .update(mapOf("estado" to "procesado")) {
+                            filter {
+                                eq("id", notificacion.pedido_id)
+                            }
+                        }
+                } else {
+                    throw IllegalArgumentException("La notificación no contiene ni reserva_id ni pedido_id.")
+                }
+
+                // Si todo es exitoso, actualizamos la lista de notificaciones en el hilo principal
                 withContext(Dispatchers.Main) {
                     notificaciones.remove(notificacion)
-                    notificaciones.add(updatedNotification)
-                    notificacionesAdapter.notifyDataSetChanged() // Notificamos que la lista se actualizó
+                    notificaciones.add(notificacion.copy(leido = true))
+                    notificacionesAdapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
-                e.printStackTrace()  // Manejo de errores
+                e.printStackTrace() // Manejo de errores
             }
         }
     }
-
 
 
 

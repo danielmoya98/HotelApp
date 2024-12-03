@@ -6,13 +6,12 @@
         android:background="#1f319d"
     android:gravity="center">
 
-    <TextView
+    <ImageView
         android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:text="Booking"
-        android:textColor="@color/white"
+        android:src="@drawable/logo"
         android:textSize="32sp"
         android:textStyle="bold" />
 

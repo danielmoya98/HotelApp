@@ -3,6 +3,7 @@ package com.example.hotelapp
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,24 +60,27 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun cargarNotificaciones() {
+        Log.d("DEBUG", "cargarNotificaciones llamado") // Log para confirmar que la función inicia
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // Consultamos las notificaciones desde Supabase
                 val response = supabaseClient.from("notificaciones")
                     .select()
                     .decodeList<Notificacion>() // Decodificamos las notificaciones
 
-                // Actualizamos la lista en el hilo principal
+                Log.d("DEBUG", "Respuesta de la base de datos: $response") // Log para ver la respuesta
+
                 withContext(Dispatchers.Main) {
-                    notificaciones.clear()  // Limpiamos la lista de notificaciones
-                    notificaciones.addAll(response)  // Agregamos las nuevas notificaciones
-                    notificacionesAdapter.notifyDataSetChanged() // Notificamos al adaptador que los datos han cambiado
+                    notificaciones.clear()
+                    notificaciones.addAll(response)
+                    Log.d("DEBUG", "Notificaciones añadidas al adaptador: $notificaciones") // Log para confirmar los datos cargados
+                    notificacionesAdapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
-                e.printStackTrace()  // Manejo de errores
+                Log.e("DEBUG", "Error al cargar notificaciones: ${e.message}", e)
             }
         }
     }
+
 
 
 

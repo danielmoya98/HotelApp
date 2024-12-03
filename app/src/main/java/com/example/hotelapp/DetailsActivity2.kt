@@ -1,6 +1,7 @@
 package com.example.hotelapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.hotelapp.dataclass.Notificacion
+import com.example.hotelapp.dataclass.Pedido
 import com.example.hotelapp.dataclass.Reserva
 import com.example.hotelapp.utils.UserSession
 import io.github.jan.supabase.createSupabaseClient
@@ -79,30 +81,56 @@ class DetailsActivity2 : AppCompatActivity() {
     }
 
     private fun finalizarCompra(userId: Int, servicioId: Int) {
-        val reserva = Reserva(
-            usuario_id = userId,
-            servicio_id = servicioId,
-            estado = "pendiente"
-        )
+        // Verificar la categoría para determinar la acción
+        val categoria = tvCategoria.text.toString().replace("Categoría: ", "")
 
-        // Enviar los datos al servidor
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = supabase.postgrest["reservas"].insert(reserva)
-                withContext(Dispatchers.Main) {
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@DetailsActivity2, "Error al conectar con el servidor: ${e.message}", Toast.LENGTH_SHORT).show()
+        if (categoria == "servicio" ) {
+            // Crear reserva para servicios
+            val reserva = Reserva(
+                usuario_id = userId,
+                servicio_id = servicioId,
+                estado = "pendiente"
+            )
+
+            // Enviar datos al servidor para reservas
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = supabase.postgrest["reservas"].insert(reserva)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@DetailsActivity2, "Reserva realizada con éxito", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@DetailsActivity2, "Error al conectar con el servidor: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
+        } else if (categoria == "producto") {
+            // Crear pedido para productos
+            val pedido = Pedido(
+                usuario_id = userId,
+                producto_id = servicioId,
+                estado = "pendiente"
+            )
+
+            // Enviar datos al servidor para pedidos
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = supabase.postgrest["pedidos"].insert(pedido)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@DetailsActivity2, "Pedido realizado con éxito", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Log.e("DetailsActivity2", "Error al conectar con el servidor", e)
+                        Toast.makeText(this@DetailsActivity2, "Error al conectar con el servidor: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(this, "Categoría no válida", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
-
-
 
 }
 

@@ -1,25 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:icon="@drawable/user"
         android:id="@+id/nav_profile"
         android:title="Perfil" />
 
     <item
-        android:id="@+id/nav_dashboard"
-        android:title="Dashboard" />
-
-    <item
+        android:icon="@drawable/user"
         android:id="@+id/nav_notis"
         android:title="Notificaiones" />
 
     <item
+        android:icon="@drawable/user"
         android:id="@+id/nav_productos"
         android:title="Crear Productos" />
 
     <item
+        android:icon="@drawable/user"
         android:id="@+id/nav_servicios"
         android:title="Crear Servicios" />
 
     <item
+        android:icon="@drawable/user"
         android:id="@+id/nav_logout"
         android:title="Cerrar sesión" />
 </menu>

@@ -63,8 +63,13 @@ class HomeFragment : Fragment() {
         // Creamos el adaptador para los productos
         adapter = HomeProductAdapter(productos, supabaseClient.storage) { producto ->
             val intent = Intent(requireContext(), DetailsActivity2::class.java)
+            intent.putExtra("id", producto.id)
             intent.putExtra("nombre", producto.nombre)
             intent.putExtra("descripcion", producto.descripcion)
+            intent.putExtra("foto", producto.imagen_url)
+            intent.putExtra("precio", producto.precio)
+            intent.putExtra("categoria", producto.categoria)
+
             startActivity(intent)
         }
         recyclerViewProductos.adapter = adapter

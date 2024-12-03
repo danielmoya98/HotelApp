@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/user"
+            android:src="@drawable/bell"
             android:layout_marginEnd="12dp"
             android:scaleType="centerCrop"
             android:contentDescription="User Icon"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pedido #12345"
-                android:textColor="#193238"
+                android:textColor="#1f319d"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:paddingBottom="4dp" />
@@ -55,6 +55,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:visibility="gone"
             android:src="@drawable/estado"
             android:layout_gravity="center_vertical"
             android:contentDescription="Estado del Pedido"

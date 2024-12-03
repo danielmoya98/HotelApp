@@ -56,6 +56,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:text="Amante de la música y la fotografía. Explorando el mundo una canción a la vez." />
 
@@ -63,7 +64,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editProfileButton"
         style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/azul"

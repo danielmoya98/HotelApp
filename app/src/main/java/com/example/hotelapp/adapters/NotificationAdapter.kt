@@ -21,8 +21,6 @@ class NotificacionesAdapter(private val notificaciones: List<Notificacion>) :
         val notificacion = notificaciones[position]
         holder.mensajeTextView.text = notificacion.mensaje
         holder.fechaEnvioTextView.text = notificacion.fecha_envio ?: "Fecha no disponible"
-
-
     }
 
     override fun getItemCount(): Int = notificaciones.size

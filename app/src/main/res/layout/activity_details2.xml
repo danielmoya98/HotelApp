@@ -27,7 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
-            app:cardElevation="4dp"
+            android:backgroundTint="@color/white"
+            app:cardElevation="10dp"
             android:layout_marginBottom="16dp">
 
             <LinearLayout
@@ -92,21 +93,12 @@
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSeguirComprando"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Seguir Comprando"
-                app:cornerRadius="10dp"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/azul"
-                android:layout_marginEnd="8dp" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFinalizarCompra"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Finalizar Compra"
                 app:cornerRadius="10dp"
+                android:backgroundTint="#1f319d"
                 android:textColor="@color/white"
                 />
         </LinearLayout>
